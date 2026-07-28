@@ -1,9 +1,7 @@
 apply plugin: "java"
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_1_8
-}
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
 
 compileJava.options.encoding = "UTF-8"
 
@@ -12,7 +10,6 @@ version = "2.1.4"
 ext {
     mindustryVersion = 'v159.7'
     arcVersion = 'v159.7'
-    jabelVersion = "93fde537c7"
 }
 
 repositories {
