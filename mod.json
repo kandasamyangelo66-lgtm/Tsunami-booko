@@ -4,5 +4,6 @@
   "author": "kandasamyangelo66",
   "description": "Adds a tsunami block that creates a spreading flood.",
   "version": "2.1.4",
-  "minGameVersion": 154
+  "minGameVersion": 154,
+  "main": "kandasamyangelo66.TsunamiMod"
 }
