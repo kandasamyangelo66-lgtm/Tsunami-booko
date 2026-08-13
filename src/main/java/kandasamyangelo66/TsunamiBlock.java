@@ -1,11 +1,10 @@
 package kandasamyangelo66;
 
-import arc.util.Timer;
-import mindustry.content.Blocks;
+import arc.util.Time;
 import mindustry.gen.Building;
+import mindustry.Vars;
 import mindustry.world.Block;
 import mindustry.world.Tile;
-import mindustry.world.World;
 
 public class TsunamiBlock extends Block {
 
@@ -24,15 +23,15 @@ public class TsunamiBlock extends Block {
 
     public class TsunamiBuild extends Building {
 
-        private float timer = 0;
+        private float timer = 0f;
 
         @Override
         public void updateTile() {
-            timer += arc.util.Time.delta;
+            timer += Time.delta;
 
-            // Spread every 2 seconds
-            if (timer >= 120) {
-                timer = 0;
+            // Spread every ~2 seconds
+            if (timer >= 2f) {
+                timer = 0f;
                 spread();
             }
         }
@@ -43,11 +42,20 @@ public class TsunamiBlock extends Block {
             };
 
             for (int[] dir : directions) {
-                Tile tile = world.tile(tileX() + dir[0], tileY() + dir[1]);
+                Tile tile = Vars.world.tile(tileX() + dir[0], tileY() + dir[1]);
 
-                if (tile != null && tile.build != null) {
-                    // Destroy buildings
+                if (tile == null) continue;
+
+                if (tile.build != null) {
+                    // Destroy buildings (own and enemy)
                     tile.build.kill();
+                    // After destroying, place tsunami block on that tile
+                    tile.setBlock(TsunamiBlock.this);
+                } else {
+                    // If there's no building and it's not already a tsunami block, spread into it
+                    if (tile.block() != TsunamiBlock.this) {
+                        tile.setBlock(TsunamiBlock.this);
+                    }
                 }
             }
         }
