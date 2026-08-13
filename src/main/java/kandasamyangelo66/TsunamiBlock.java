@@ -14,6 +14,7 @@ public class TsunamiBlock extends Block {
         solid = true;
         destructible = true;
         size = 1;
+        buildType = TsunamiBuild::new;
     }
 
     @Override
